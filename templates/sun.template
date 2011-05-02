@@ -1,0 +1,6 @@
+{% extends "base.template" %}
+{% block title %}Solar Orbital Information{% endblock %}
+{% block content %}
+Put Stuff Here
+{% endblock %}
+

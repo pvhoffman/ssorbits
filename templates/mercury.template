@@ -1,0 +1,5 @@
+{% extends "base.template" %}
+{% block title %}Mercury Orbital Information{% endblock %}
+{% block content %}
+{% endblock %}
+

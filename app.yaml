@@ -1,0 +1,19 @@
+# app.yaml
+# Copyright (c) 2011, Paul V. Hoffman.
+# All rights reserved.
+
+application: ssorbits
+version: 1
+runtime: python
+api_version: 1
+
+handlers:
+- url: /css
+  static_dir: css
+
+- url: /js
+  static_dir: js
+
+- url: /.*
+  script: ./main.py
+
