@@ -9,18 +9,30 @@
 
 <body>
     <div id="header">
-        <div id="sidebar">
-            <ul id="top-menu">
-                <li><a href="/mercury">Mercury</a></li>
-                <li><a href="/venus">Venus</a></li>
-                <li><a href="/sun">Sun</a></li>
-                <li><a href="/mars">Mars</a></li>
-                <li><a href="/jupiter">Jupiter</a></li>
-                <li><a href="/saturn">Saturn</a></li>
-                <li><a href="/uranus">Uranus</a></li>
-                <li><a href="/neptune">Neptune</a></li>
-            </ul>
+    </div>
+
+    <div id="content">
+        <div class="columns">
+            <div id="left-column"></div>
+            <div id="right-column"></div>
         </div>
+    </div>
+    <div id="footer">
+    </div>
+
+
+
+    <div id="sidebar">
+        <ul id="top-menu">
+            <li><a href="/mercury">Mercury</a></li>
+            <li><a href="/venus">Venus</a></li>
+            <li><a href="/sun">Sun</a></li>
+            <li><a href="/mars">Mars</a></li>
+            <li><a href="/jupiter">Jupiter</a></li>
+            <li><a href="/saturn">Saturn</a></li>
+            <li><a href="/uranus">Uranus</a></li>
+            <li><a href="/neptune">Neptune</a></li>
+        </ul>
     </div>
     <div id="content">
         {% block content %}{% endblock %}

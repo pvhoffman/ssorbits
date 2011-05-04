@@ -1,37 +1,22 @@
 body {font-family:"Trebuchet MS", "Sans-Serif";font-size:12px;}
 
 #header {
-        width: 800px;
-        margin-left:auto;
-        margin-right:auto;
-}
-ul#top-menu {
-    padding: 0; 
-    margin: 0; 
-    list-style-type: none; 
-    width: 100%; 
-    color: #000; 
-    background-color: #fff; 
-}
-ul#top-menu li { 
-    margin: 0;
-    padding: 0;
-    display: inline; 
+	clear:both;
+	float:left;
+	width:100%;
+	border-bottom:1px solid #000;
 }
 
 #content {
-        display:block;
+       	position:relative;
+	clear:both;
+	float:left;
+	width:100%;
+	overflow:hidden;
+        background:#fff;
 }
-ul#top-menu li a { 
-/*    min-width: 55px; */
-    color: #fff; 
-    background-color: #666; 
-    padding: 0.2em 1em; 
-    text-decoration: none; 
-    border-right: 1px solid #fff; 
+#columns {
+       	float:left;
+	width:100%;
+	position:relative; 
 }
-ul#top-menu li a:hover { 
-    background-color: #ccc; 
-    color: #000; 
-} 
-
