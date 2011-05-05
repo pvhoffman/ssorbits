@@ -1,6 +1,6 @@
 {% extends "base.template" %}
-{% block title %}Solar Orbital Information{% endblock %}
-{% block content %}
-Put Stuff Here
+{% block objectID %}solarSystemOrbits.orbitalElementsSun{% endblock %}
+{% block header %}
+Solar Orbital Data
 {% endblock %}
 

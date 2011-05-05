@@ -1,42 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <link rel="stylesheet" href="/css/style.css" />
-    <script type="text/javascript" src="/js/jsorbits-solarsystem/jsorbits-solarsystem.js"></script>
-    <script type="text/javascript" src="/js/jsorbits-solarsystem/jquery.min.js"></script>
-    <title>{% block title %}Solar System Orbits{% endblock %}</title>
-</head>
+	<head>
+		<title>Orbital Positions of Selected Objects in the Solar System</title>
+		<link rel="stylesheet" href="/css/style.css" />
+		<script type="text/javascript" src="/js/jsorbits-solarsystem/jquery.min.js"></script>
+		<script type="text/javascript" src="/js/jsorbits-solarsystem/jsorbits-solarsystem.js"></script>
+		<script type="text/javascript">
+<!--
+			var _ooi = {% block objectID %}{% endblock %};
+			var _userLat = 33.5;
+			var _userLon = 117.03;
 
-<body>
-    <div id="header">
-    </div>
+			function toggleNightMode() {
+					if($('body').hasClass('night-mode')){
+						$('body').removeClass('night-mode');
+						$('#header').css('border-bottom', '1px solid #000')
+						$('#footer').css('border-top', '1px solid #000')
+					} else {
+						$('body').addClass('night-mode');
+						$('#header').css('border-bottom', '1px solid #AA0000')
+						$('#footer').css('border-top', '1px solid #AA0000')
+					}
 
-    <div id="content">
-        <div class="columns">
-            <div id="left-column"></div>
-            <div id="right-column"></div>
-        </div>
-    </div>
-    <div id="footer">
-    </div>
+			}
+			function updateOrbitalData() {
+				var d = new Date();
+				var e = solarSystemOrbits.epochFromDate(d);
+                		var u = d.getUTCHours() + d.getUTCMinutes() / 60.0 + d.getUTCSeconds() / 3600.0;
+				var r = _ooi.data(e, u, _userLat, _userLon);
+				var a = r.coords.hourangle * (180.0 / Math.PI);
 
+				$('#user-time').html(d.toLocaleString());
+				$('#user-epoch').html( '' + e.toFixed(3));
+				$('#hour-angle').html( '' + a.toFixed(3) + '°');
 
+				// update every 5 seconds
+				setTimeout("updateOrbitalData();", 2000);
+			}
+			function updateUserLocation() {
+				alert ('not yet implemented');
+			}
+			$(function(){
+					$('#toggle-switch').click(function(){
+						toggleNightMode();
+					});
+					$('#update-location-button').click(function(){
+						updateUserLocation();		
+					});
 
-    <div id="sidebar">
-        <ul id="top-menu">
-            <li><a href="/mercury">Mercury</a></li>
-            <li><a href="/venus">Venus</a></li>
-            <li><a href="/sun">Sun</a></li>
-            <li><a href="/mars">Mars</a></li>
-            <li><a href="/jupiter">Jupiter</a></li>
-            <li><a href="/saturn">Saturn</a></li>
-            <li><a href="/uranus">Uranus</a></li>
-            <li><a href="/neptune">Neptune</a></li>
-        </ul>
-    </div>
-    <div id="content">
-        {% block content %}{% endblock %}
-    </div>
-</body>
+					updateOrbitalData();
+			});
+-->
+		</script>
+	</head>
+
+	<body>
+		<div id="header">
+			<div id="header-title">
+				<h1>{% block header %}{% endblock %}</h1>
+			</div>
+			<div id="header-right">
+				<a href="#" id="toggle-switch">Toggle Night Mode</a>
+			</div>
+		</div>
+
+		<div id="content">
+			<div id="columns">
+				<div id="right-column">
+					<div id="user-location-input">
+						<label for="user-location">Your Location:</label>
+						<input type="text" id="user-location" value="San Diego, CA" size="90" />
+						<button type="button" id="update-location-button">Update</button>
+					</div>
+					<div>
+						<table border="0" cellpadding="2" cellspacing="2">
+							<tr>
+								<td class="row-label">Date/Time of Calculation:&nbsp;</td>
+								<td id="user-time" class="row-value"></td>
+							</tr>
+							<tr>
+								<td class="row-label">Epoch:&nbsp;</td>
+								<td id="user-epoch" class="row-value"></td>
+							</tr>
+							<tr>
+								<td class="row-label">Hour Angle:&nbsp;</td>
+								<td id="hour-angle" class="row-value"></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<div id="left-column">
+					<ul id="object-menu">
+						<li><a href="/mercury">Mercury</a></li>
+						<li><a href="/venus">Venus</a></li>
+						<li><a href="/sun">Sun</a></li>
+						<li><a href="/mars">Mars</a></li>
+						<li><a href="/jupiter">Jupiter</a></li>
+						<li><a href="/saturn">Saturn</a></li>
+						<li><a href="/uranus">Uranus</a></li>
+						<li><a href="/neptune">Neptune</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div id="footer">
+			footer stuff goes here.
+		</div>
+
+	</body>
 </html>
 

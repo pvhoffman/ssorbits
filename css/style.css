@@ -1,22 +1,76 @@
-body {font-family:"Trebuchet MS", "Sans-Serif";font-size:12px;}
-
+body {
+	font-family:"Trebuchet MS", "Sans-Serif";
+	font-size:12px;
+}
+.night-mode {
+	background:#000;
+	color:#AA0000;
+}
 #header {
 	clear:both;
 	float:left;
 	width:100%;
 	border-bottom:1px solid #000;
 }
-
 #content {
-       	position:relative;
+	position:relative;
 	clear:both;
 	float:left;
 	width:100%;
 	overflow:hidden;
-        background:#fff;
 }
 #columns {
-       	float:left;
+	float:left;
 	width:100%;
 	position:relative; 
+	right:75%;
+}
+#right-column {
+	float:left;
+	position:relative;
+	padding:0 0 1em 0;
+	overflow:hidden;
+	width:71%;
+	left:102%;
+}
+#left-column {
+	float:left;
+	position:relative;
+	padding:0 0 1em 0;
+	overflow:hidden;
+	width:21%;
+	left:6%;
+}
+#footer {
+	clear:both;
+	float:left;
+	width:100%;
+	border-top:1px solid #000;
+}
+#object-menu {
+}
+
+#object-menu li {
+	list-style-type:none;
+}
+#object-menu li a {
+	text-decoration:none;
+}
+#header-title {
+	float:left;
+}
+#header-right {
+	float:right;
+}
+#toggle-switch {
+	text-decoration:none;
+}
+#user-location-input {
+	clear:both;
+	float:left;
+	width:100%;
+
+}
+.row-label {
+	font-weight:bold;
 }
