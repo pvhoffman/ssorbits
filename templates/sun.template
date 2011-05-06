@@ -1,6 +1,6 @@
 {% extends "base.template" %}
 {% block objectID %}solarSystemOrbits.orbitalElementsSun{% endblock %}
 {% block header %}
-Solar Orbital Data
+Approximate Solar Orbital Data
 {% endblock %}
 

@@ -1,57 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>Orbital Positions of Selected Objects in the Solar System</title>
+		<title>Approximate Orbital Positions of Selected Objects in the Solar System</title>
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 		<link rel="stylesheet" href="/css/style.css" />
 		<script type="text/javascript" src="/js/jsorbits-solarsystem/jquery.min.js"></script>
 		<script type="text/javascript" src="/js/jsorbits-solarsystem/jsorbits-solarsystem.js"></script>
+
+		<script type="text/javascript" src="/js/jquery-cookie/jquery.cookie.js"></script>
+
+		<script type="text/javascript" src="/js/ssorbits.js"></script>
+
+		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 		<script type="text/javascript">
-<!--
+			<!--
 			var _ooi = {% block objectID %}{% endblock %};
-			var _userLat = 33.5;
-			var _userLon = 117.03;
 
-			function toggleNightMode() {
-					if($('body').hasClass('night-mode')){
-						$('body').removeClass('night-mode');
-						$('#header').css('border-bottom', '1px solid #000')
-						$('#footer').css('border-top', '1px solid #000')
-					} else {
-						$('body').addClass('night-mode');
-						$('#header').css('border-bottom', '1px solid #AA0000')
-						$('#footer').css('border-top', '1px solid #AA0000')
-					}
+function toggleNightMode() {
+	if($('body').hasClass('night-mode')){
+		$('body').removeClass('night-mode');
+		$('#header').css('border-bottom', '1px solid #000');
+		$('#footer').css('border-top', '1px solid #000');
+		$.cookie('ssorbits.nightmode', false);
+	} else {
+		$('body').addClass('night-mode');
+		$('#header').css('border-bottom', '1px solid #AA0000');
+		$('#footer').css('border-top', '1px solid #AA0000');
+		$.cookie('ssorbits.nightmode', true);
+	}
 
+}
+function urlencode(str) {
+	return escape(str).replace(/\+/g,'%2B').replace(/%20/g, '+').replace(/\*/g, '%2A').replace(/\//g, '%2F').replace(/@/g, '%40');
+}
+
+function updateUserLocation() {
+	var userLocation = urlencode($('#user-location').val());
+	var geocoder = new google.maps.Geocoder();
+	geocoder.geocode( { 'address': userLocation}, function(results, status) {
+			var success = false;
+			if(results.length > 0 && results[0].geometry && results[0].geometry.location){
+			var lat = results[0].geometry.location.lat();
+			var lng = results[0].geometry.location.lng();
+			if(lat && lng){
+			success = true;
+			ssorbits.userLatitude = lat;
+			ssorbits.userLongitude = lng;
 			}
-			function updateOrbitalData() {
-				var d = new Date();
-				var e = solarSystemOrbits.epochFromDate(d);
-                		var u = d.getUTCHours() + d.getUTCMinutes() / 60.0 + d.getUTCSeconds() / 3600.0;
-				var r = _ooi.data(e, u, _userLat, _userLon);
-				var a = r.coords.hourangle * (180.0 / Math.PI);
-
-				$('#user-time').html(d.toLocaleString());
-				$('#user-epoch').html( '' + e.toFixed(3));
-				$('#hour-angle').html( '' + a.toFixed(3) + '°');
-
-				// update every 5 seconds
-				setTimeout("updateOrbitalData();", 2000);
 			}
-			function updateUserLocation() {
-				alert ('not yet implemented');
+			if(success){
+				$('#user-location').val(ssorbits.userLatitude + ', ' + ssorbits.userLongitude);
+				$.cookie('ssorbits.userLatitude', ssorbits.userLatitude);
+				$.cookie('ssorbits.userLongitude', ssorbits.userLongitude);
+				alert('Location successfuly updated.');
+			} else {
+				alert('Could not update location, location not found. Please enter a valid address.');
 			}
-			$(function(){
-					$('#toggle-switch').click(function(){
-						toggleNightMode();
-					});
-					$('#update-location-button').click(function(){
-						updateUserLocation();		
-					});
-
-					updateOrbitalData();
 			});
+}
+$(function(){
+		$('#toggle-switch').click(function(){
+			toggleNightMode();
+			});
+		$('#update-location-button').click(function(){
+			updateUserLocation();		
+			});
+		if($.cookie('ssorbits.userLatitude') && $.cookie('ssorbits.userLongitude')){
+			ssorbits.userLatitude  = $.cookie('ssorbits.userLatitude');
+			ssorbits.userLongitude = $.cookie('ssorbits.userLongitude');
+			$('#user-location').val(ssorbits.userLatitude + ', ' + ssorbits.userLongitude);
+		}
+
+		if($.cookie('ssorbits.nightmode')){
+			if($.cookie('ssorbits.nightmode') == 'true')
+				toggleNightMode();
+		}
+		ssorbits.loop(_ooi);
+		});
 -->
-		</script>
+</script>
 	</head>
 
 	<body>
@@ -75,17 +102,69 @@
 					<div>
 						<table border="0" cellpadding="2" cellspacing="2">
 							<tr>
-								<td class="row-label">Date/Time of Calculation:&nbsp;</td>
+								<td class="row-label">Local Date/Time used for Calculation:&nbsp;</td>
 								<td id="user-time" class="row-value"></td>
 							</tr>
 							<tr>
-								<td class="row-label">Epoch:&nbsp;</td>
-								<td id="user-epoch" class="row-value"></td>
+								<td class="row-label">Hour Angle:&nbsp;</td>
+								<td class="row-value"><span id="hourangle-degrees"></span>&deg;</td>
 							</tr>
 							<tr>
-								<td class="row-label">Hour Angle:&nbsp;</td>
-								<td id="hour-angle" class="row-value"></td>
+								<td class="row-label">&nbsp;</td>
+								<td class="row-value"><span id="hourangle-hours"></span>h&nbsp;<span id="hourangle-minutes"></span>&rsquo;&nbsp;<span id="hourangle-seconds"></span>&rsquo;&rsquo;</td>
 							</tr>
+							<tr>
+								<td class="row-label" colspan="2">Spherical Geocentric Coordinates</td>
+							</tr>
+							<tr>
+								<td class="row-label">RA:</td>
+								<td class="row-value"><span id="ra-geo-degrees"></span>&deg;</td>
+							</tr>
+							<tr>
+								<td class="row-label">&nbsp;</td>
+								<td class="row-value"><span id="ra-geo-hours"></span>h&nbsp;<span id="ra-geo-minutes"></span>&rsquo;&nbsp;<span id="ra-geo-seconds"></span>&rsquo;&rsquo;</td>
+							</tr>
+							<tr>
+								<td class="row-label">DE:</td>
+								<td class="row-value"><span id="de-geo-degrees1"></span>&deg;</td>
+							</tr>
+							<tr>
+								<td class="row-label">&nbsp;</td>
+								<td class="row-value"><span id="de-geo-degrees2"></span>&deg;&nbsp;<span id="de-geo-minutes"></span>&rsquo;&nbsp;<span id="de-geo-seconds"></span>&rsquo;&rsquo;</td>
+							</tr>
+							<tr>
+								<td class="row-label" colspan="2">Spherical Topocentric Coordinates</td>
+							</tr>
+							<tr>
+								<td class="row-label">RA:</td>
+								<td class="row-value"><span id="ra-topo-degrees"></span>&deg;</td>
+							</tr>
+							<tr>
+								<td class="row-label">&nbsp;</td>
+								<td class="row-value"><span id="ra-topo-hours"></span>h&nbsp;<span id="ra-topo-minutes"></span>&rsquo;&nbsp;<span id="ra-topo-seconds"></span>&rsquo;&rsquo;</td>
+							</tr>
+							<tr>
+								<td class="row-label">DE:</td>
+								<td class="row-value"><span id="de-topo-degrees1"></span>&deg;</td>
+							</tr>
+							<tr>
+								<td class="row-label">&nbsp;</td>
+								<td class="row-value"><span id="de-topo-degrees2"></span>&deg;&nbsp;<span id="de-topo-minutes"></span>&rsquo;&nbsp;<span id="de-topo-seconds"></span>&rsquo;&rsquo;</td>
+							</tr>
+							<tr>
+								<td class="row-label" colspan="2">Horizontal Topocentric Coordinates</td>
+							</tr>
+							<tr>
+								<td class="row-label">AZ:</td>
+								<td class="row-value"><span id="az-topo-degrees"></span>&deg;</td>
+							</tr>
+							<tr>
+								<td class="row-label">AL:</td>
+								<td class="row-value"><span id="al-topo-degrees"></span>&deg;</td>
+							</tr>
+							{% block ssphase %}
+							{% endblock %}
+
 						</table>
 					</div>
 				</div>
@@ -99,13 +178,15 @@
 						<li><a href="/saturn">Saturn</a></li>
 						<li><a href="/uranus">Uranus</a></li>
 						<li><a href="/neptune">Neptune</a></li>
+						<li><a href="/moon">Earth's Moon</a></li>
+
 					</ul>
 				</div>
 			</div>
 		</div>
 
 		<div id="footer">
-			footer stuff goes here.
+			<p>Calculations derived from the wonderful tutorial by Paul Schlyter at <a href="http://stjarnhimlen.se/comp/tutorial.html">http://stjarnhimlen.se/comp/tutorial.html</a>.  Any mistakes in these calculations are my own.</p>
 		</div>
 
 	</body>

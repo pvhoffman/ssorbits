@@ -6,6 +6,9 @@ body {
 	background:#000;
 	color:#AA0000;
 }
+.night-mode a {
+	color:#7a7;
+}
 #header {
 	clear:both;
 	float:left;
@@ -61,6 +64,10 @@ body {
 }
 #header-right {
 	float:right;
+}
+#footer p {
+	margin:0.5em 0 0 0;
+	padding:0 0 0 0;
 }
 #toggle-switch {
 	text-decoration:none;

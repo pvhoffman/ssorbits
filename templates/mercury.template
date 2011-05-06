@@ -1,5 +1,23 @@
 {% extends "base.template" %}
-{% block title %}Mercury Orbital Information{% endblock %}
-{% block content %}
+{% block objectID %}solarSystemOrbits.orbitalElementsMercury{% endblock %}
+{% block header %}
+Approximate Mercury Orbital Data
+{% endblock %}
+{% block ssphase %}
+<tr>
+	<td class="row-label" colspan="2">Misc</td>
+</tr>
+<tr>
+	<td class="row-label">Elongation Angle:</td>
+	<td class="row-value"><span id="elongation-angle"></span>&deg;</td>
+<tr>
+
+	<td class="row-label">Phase Percent:</td>
+	<td class="row-value"><span id="phase-percent"></span>%</td>
+<tr>
+
+	<td class="row-label">Magnitude:</td>
+	<td class="row-value"><span id="magnitude"></span></td>
+</tr>
 {% endblock %}
 
