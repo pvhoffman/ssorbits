@@ -1,0 +1,1 @@
+Google App Engine application to display the orbital position (geocentric & topocentric right ascension & declination, topocentric horizontal coordinates) calculations of Mercury, Venus, Sun (Earth), Mars, Jupiter, Saturn, Uranus, Neptune, and Earth's Moon.  The actual calculations are done in the javascript, which can be found in my jsorbits-solarsystem repo.
