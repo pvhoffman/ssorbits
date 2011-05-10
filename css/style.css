@@ -49,6 +49,7 @@ body {
 	float:left;
 	width:100%;
 	border-top:1px solid #000;
+        margin-bottom:10px;
 }
 #object-menu {
 }
@@ -66,8 +67,8 @@ body {
 	float:right;
 }
 #footer p {
-	margin:0.5em 0 0 0;
-	padding:0 0 0 0;
+	margin:0;
+	padding:0;
 }
 #toggle-switch {
 	text-decoration:none;
@@ -76,8 +77,22 @@ body {
 	clear:both;
 	float:left;
 	width:100%;
+        margin-bottom:10px;
 
 }
 .row-label {
 	font-weight:bold;
+}
+.row-label a {
+        text-decoration:none;
+        color:inherit;
+}
+.row-label a:hover {
+        color:red;
+}
+.group-sep {
+	border-top:1px solid #A7A9A7;
+}
+#header-title a {
+        text-decoration:none;
 }

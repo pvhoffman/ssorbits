@@ -1,22 +1,29 @@
 {% extends "base.template" %}
+{% block info %}
+<meta name="keywords" content="mars, orbit, coordinates, elongation, phase angle, hour angle, right ascension, declination, altitude, azimuth" />
+{% endblock %}
 {% block objectID %}solarSystemOrbits.orbitalElementsMars{% endblock %}
 {% block header %}
-Approximate Mars Orbital Data
+Approximate Orbital Coordinates &amp; Information for <a href="http://en.wikipedia.org/wiki/Mars" target="_blank">Mars</a>
 {% endblock %}
 {% block ssphase %}
 <tr>
 	<td class="row-label" colspan="2">Misc</td>
 </tr>
 <tr>
-	<td class="row-label">Elongation Angle:</td>
+	<td class="row-label"><a href="http://en.wikipedia.org/wiki/Elongation_(astronomy)" target="_blank">Elongation Angle:</a></td>
 	<td class="row-value"><span id="elongation-angle"></span>&deg;</td>
+</tr>
 <tr>
-
-	<td class="row-label">Phase Percent:</td>
+	<td class="row-label"><a href="http://en.wikipedia.org/wiki/Phase_angle_(astronomy)" target="_blank">Phase Angle:</a></td>
+	<td class="row-value"><span id="phase-angle"></span>&deg;</td>
+</tr>
+<tr>
+	<td class="row-label"><a href="http://en.wikipedia.org/wiki/Planetary_phase" target="_blank">Phase Percent:</a></td>
 	<td class="row-value"><span id="phase-percent"></span>%</td>
+</tr>
 <tr>
-
-	<td class="row-label">Magnitude:</td>
+	<td class="row-label"><a href="http://en.wikipedia.org/wiki/Magnitude_(astronomy)" target="_blank">Magnitude:</a></td>
 	<td class="row-value"><span id="magnitude"></span></td>
 </tr>
 {% endblock %}

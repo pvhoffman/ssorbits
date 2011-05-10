@@ -1,6 +1,9 @@
 {% extends "base.template" %}
+{% block info %}
+<meta name="keywords" content="sun, solar, orbit, coordinates, hour angle, right ascension, declination, altitude, azimuth" />
+{% endblock %}
 {% block objectID %}solarSystemOrbits.orbitalElementsSun{% endblock %}
 {% block header %}
-Approximate Solar Orbital Data
+Approximate Orbital Coordinates &amp; Information for the <a href="http://en.wikipedia.org/wiki/Sun" target="_blank">Sun</a>
 {% endblock %}
 

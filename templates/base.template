@@ -2,7 +2,10 @@
 <html lang="en">
 	<head>
 		<title>Approximate Orbital Positions of Selected Objects in the Solar System</title>
+                {% block info %}
+                {% endblock %}
 		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+
 		<link rel="stylesheet" href="/css/style.css" />
 		<script type="text/javascript" src="/js/jsorbits-solarsystem/jquery.min.js"></script>
 		<script type="text/javascript" src="/js/jsorbits-solarsystem/jsorbits-solarsystem.js"></script>
@@ -76,7 +79,7 @@ $(function(){
 				toggleNightMode();
 		}
 		ssorbits.loop(_ooi);
-		});
+});
 -->
 </script>
 	</head>
@@ -98,15 +101,16 @@ $(function(){
 						<label for="user-location">Your Location:</label>
 						<input type="text" id="user-location" value="San Diego, CA" size="90" />
 						<button type="button" id="update-location-button">Update</button>
+                                                <p style="margin:0;padding:0;">Update interval is 5 seconds.</p>
 					</div>
 					<div>
-						<table border="0" cellpadding="2" cellspacing="2">
-							<tr>
+						<table border="0" cellpadding="1" cellspacing="1">
+                                                        <tr>
 								<td class="row-label">Local Date/Time used for Calculation:&nbsp;</td>
 								<td id="user-time" class="row-value"></td>
 							</tr>
 							<tr>
-								<td class="row-label">Hour Angle:&nbsp;</td>
+                                                                <td class="row-label"><a href="http://en.wikipedia.org/wiki/Hour_angle" target="_blank">Hour Angle:</a>&nbsp;</td>
 								<td class="row-value"><span id="hourangle-degrees"></span>&deg;</td>
 							</tr>
 							<tr>
@@ -114,10 +118,10 @@ $(function(){
 								<td class="row-value"><span id="hourangle-hours"></span>h&nbsp;<span id="hourangle-minutes"></span>&rsquo;&nbsp;<span id="hourangle-seconds"></span>&rsquo;&rsquo;</td>
 							</tr>
 							<tr>
-								<td class="row-label" colspan="2">Spherical Geocentric Coordinates</td>
+								<td class="row-label group-sep" colspan="2">Spherical Geocentric Coordinates</td>
 							</tr>
 							<tr>
-								<td class="row-label">RA:</td>
+                                                                <td class="row-label"><a href="http://en.wikipedia.org/wiki/Right_ascension" target="_blank">RA:</a></td>
 								<td class="row-value"><span id="ra-geo-degrees"></span>&deg;</td>
 							</tr>
 							<tr>
@@ -125,7 +129,7 @@ $(function(){
 								<td class="row-value"><span id="ra-geo-hours"></span>h&nbsp;<span id="ra-geo-minutes"></span>&rsquo;&nbsp;<span id="ra-geo-seconds"></span>&rsquo;&rsquo;</td>
 							</tr>
 							<tr>
-								<td class="row-label">DE:</td>
+                                                                <td class="row-label"><a href="http://en.wikipedia.org/wiki/Declination" target="_blank">DE:</a></td>
 								<td class="row-value"><span id="de-geo-degrees1"></span>&deg;</td>
 							</tr>
 							<tr>
@@ -133,10 +137,10 @@ $(function(){
 								<td class="row-value"><span id="de-geo-degrees2"></span>&deg;&nbsp;<span id="de-geo-minutes"></span>&rsquo;&nbsp;<span id="de-geo-seconds"></span>&rsquo;&rsquo;</td>
 							</tr>
 							<tr>
-								<td class="row-label" colspan="2">Spherical Topocentric Coordinates</td>
+								<td class="row-label group-sep" colspan="2">Spherical Topocentric Coordinates</td>
 							</tr>
 							<tr>
-								<td class="row-label">RA:</td>
+                                                                <td class="row-label"><a href="http://en.wikipedia.org/wiki/Right_ascension" target="_blank">RA:</a></td>
 								<td class="row-value"><span id="ra-topo-degrees"></span>&deg;</td>
 							</tr>
 							<tr>
@@ -144,7 +148,7 @@ $(function(){
 								<td class="row-value"><span id="ra-topo-hours"></span>h&nbsp;<span id="ra-topo-minutes"></span>&rsquo;&nbsp;<span id="ra-topo-seconds"></span>&rsquo;&rsquo;</td>
 							</tr>
 							<tr>
-								<td class="row-label">DE:</td>
+                                                                <td class="row-label"><a href="http://en.wikipedia.org/wiki/Declination" target="_blank">DE:</a></td>
 								<td class="row-value"><span id="de-topo-degrees1"></span>&deg;</td>
 							</tr>
 							<tr>
@@ -152,14 +156,14 @@ $(function(){
 								<td class="row-value"><span id="de-topo-degrees2"></span>&deg;&nbsp;<span id="de-topo-minutes"></span>&rsquo;&nbsp;<span id="de-topo-seconds"></span>&rsquo;&rsquo;</td>
 							</tr>
 							<tr>
-								<td class="row-label" colspan="2">Horizontal Topocentric Coordinates</td>
+								<td class="row-label group-sep" colspan="2">Horizontal Topocentric Coordinates</td>
 							</tr>
 							<tr>
-								<td class="row-label">AZ:</td>
+                                                                <td class="row-label"><a href="http://en.wikipedia.org/wiki/Horizontal_coordinate_system" target="_blank">AZ:</a></td>
 								<td class="row-value"><span id="az-topo-degrees"></span>&deg;</td>
 							</tr>
 							<tr>
-								<td class="row-label">AL:</td>
+                                                                <td class="row-label"><a href="http://en.wikipedia.org/wiki/Horizontal_coordinate_system" target="_blank">AL:</a></td>
 								<td class="row-value"><span id="al-topo-degrees"></span>&deg;</td>
 							</tr>
 							{% block ssphase %}
@@ -186,7 +190,9 @@ $(function(){
 		</div>
 
 		<div id="footer">
-			<p>Calculations derived from the wonderful tutorial by Paul Schlyter at <a href="http://stjarnhimlen.se/comp/tutorial.html">http://stjarnhimlen.se/comp/tutorial.html</a>.  Any mistakes in these calculations are my own.</p>
+                    <p>Created by <a href="mailto:pvhoffman@gmail.com">Paul V. Hoffman</a></p>
+			<p>Calculations derived from the wonderful tutorial by Paul Schlyter at <a href="http://stjarnhimlen.se/comp/tutorial.html" target="_blank">http://stjarnhimlen.se/comp/tutorial.html</a>.  Any mistakes in these calculations are my own.</p>
+                        <p>Code available <a href="https://github.com/pvhoffman/jsorbits-solarsystem" target="_blank">here</a> and <a href="https://github.com/pvhoffman/ssorbits" target="_blank">here</a>.</p>
 		</div>
 
 	</body>

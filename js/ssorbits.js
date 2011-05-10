@@ -80,6 +80,10 @@ var ssorbits = {
 				|| this.orbitalElement.id == 'mars'){
 			deg = this.toDegrees(r.e.elongation);
 			$('#elongation-angle').html(deg.toFixed(2));
+
+                        deg = this.toDegrees(r.e.phaseangle);
+                        $('#phase-angle').html(deg.toFixed(2));
+
 			deg = r.e.phase * 100.0;
 			$('#phase-percent').html(deg.toFixed(2));
 			$('#magnitude').html(r.e.magnitude.toFixed(3));
