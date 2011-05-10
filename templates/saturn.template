@@ -8,7 +8,7 @@ Approximate Orbital Coordinates &amp; Information for <a href="http://en.wikiped
 {% endblock %}
 {% block ssphase %}
 <tr>
-	<td class="row-label" colspan="2">Misc</td>
+	<td class="row-label group-sep" colspan="2">Misc</td>
 </tr>
 <tr>
 	<td class="row-label"><a href="http://en.wikipedia.org/wiki/Elongation_(astronomy)" target="_blank">Elongation Angle:</a></td>

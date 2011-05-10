@@ -103,7 +103,6 @@ $(function(){
 						<button type="button" id="update-location-button">Update</button>
                                                 <p style="margin:0;padding:0;">Update interval is 5 seconds.</p>
 					</div>
-					<div>
 						<table border="0" cellpadding="1" cellspacing="1">
                                                         <tr>
 								<td class="row-label">Local Date/Time used for Calculation:&nbsp;</td>
@@ -170,7 +169,6 @@ $(function(){
 							{% endblock %}
 
 						</table>
-					</div>
 				</div>
 				<div id="left-column">
 					<ul id="object-menu">
