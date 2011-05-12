@@ -1,3 +1,5 @@
+import os
+
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
 from google.appengine.ext.webapp import template
@@ -12,6 +14,17 @@ from saturn import View as saturnv
 from uranus import View as uranusv
 from neptune import View as neptunev
 
+#stupid hack for favicon.ico & not having time to figure out how to do it in the app.yaml
+
+class favicon(webapp.RequestHandler):
+    def get(self):
+        self.response.headers['Content-Type'] = 'image/x-icon'
+        (p, f) = os.path.split(__file__)
+        f = os.path.join(p, 'favicon.ico')
+        fd = open(f, 'rb')
+        self.response.out.write(fd.read())
+        fd.close()
+
 application = webapp.WSGIApplication(
 		[('/', sunv)
 			, ('/sun', sunv)
@@ -22,7 +35,8 @@ application = webapp.WSGIApplication(
 			, ('/neptune', neptunev)
 			, ('/uranus', uranusv)
 			, ('/saturn', saturnv)
-			, ('/jupiter', jupiterv)]
+			, ('/jupiter', jupiterv)
+                        , ('/favicon.ico', favicon)]
 		, debug=True)
 
 def main():
