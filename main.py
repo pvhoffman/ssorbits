@@ -14,26 +14,30 @@ from saturn import View as saturnv
 from uranus import View as uranusv
 from neptune import View as neptunev
 
-class googleauthv(webapp.RequestHandler):
+#stupid hack for favicon.ico & not having time to figure out how to do it in the app.yaml
+
+class favicon(webapp.RequestHandler):
     def get(self):
-        (path, filename) = os.path.split(__file__)
-        fn = os.path.join(path, 'googlebc8690495dcb0c72.html')
-        fd = open(fn, 'rb');
+        self.response.headers['Content-Type'] = 'image/x-icon'
+        (p, f) = os.path.split(__file__)
+        f = os.path.join(p, 'favicon.ico')
+        fd = open(f, 'rb')
         self.response.out.write(fd.read())
+        fd.close()
 
 application = webapp.WSGIApplication(
-        [('/', sunv)
-            , ('/sun', sunv)
-            , ('/mercury', mercuryv)
-            , ('/venus', venusv)
-            , ('/moon', earthmoonv)
-            , ('/mars', marsv)
-            , ('/neptune', neptunev)
-            , ('/uranus', uranusv)
-            , ('/saturn', saturnv)
-            , ('/jupiter', jupiterv)
-            , ('/googlebc8690495dcb0c72.html', googleauthv)]
-        , debug=True)
+		[('/', sunv)
+			, ('/sun', sunv)
+			, ('/mercury', mercuryv)
+			, ('/venus', venusv)
+			, ('/moon', earthmoonv)
+			, ('/mars', marsv)
+			, ('/neptune', neptunev)
+			, ('/uranus', uranusv)
+			, ('/saturn', saturnv)
+			, ('/jupiter', jupiterv)
+                        , ('/favicon.ico', favicon)]
+		, debug=True)
 
 def main():
     run_wsgi_app(application)
